@@ -1,16 +1,16 @@
 
-#include "map.h"
+#include "maze.h"
 
 class Orienteering {
 public:
   void main();
 private:
-  Map *map;
+  Maze *maze;
 };
 
 void Orienteering::main() {
-  map = new Map();
-  map->parse();
+  maze = new Maze();
+  maze->parse();
 }
 
 int main(int argc, char* argv[]) {

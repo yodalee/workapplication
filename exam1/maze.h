@@ -1,5 +1,5 @@
-#ifndef MAP_H_
-#define MAP_H_ value
+#ifndef MAZE_H_
+#define MAZE_H_ value
 
 #include <vector>
 #include <iostream>
@@ -8,11 +8,11 @@ using namespace std;
 
 #include "node.h"
 
-class Map
+class Maze
 {
 public:
-  Map ();
-  ~Map();
+  Maze ();
+  ~Maze();
   void parse();
 private:
   vector<Node *> data;
@@ -21,4 +21,4 @@ private:
 
   int height, width;
 };
-#endif /* MAP_H_ */
+#endif /* MAZE_H_ */

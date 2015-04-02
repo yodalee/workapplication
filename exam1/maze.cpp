@@ -1,19 +1,19 @@
-#include "map.h"
+#include "maze.h"
 
-Map::Map() {
+Maze::Maze() {
   start = -1;
   end = -1;
 }
 
 //release all Node stored in data vector
-Map::~Map() {
+Maze::~Maze() {
   vector<Node *>::iterator it;
   for (it = data.begin(); it != data.end(); ++it) {
     delete *it;
   }
 }
 
-void Map::parse() {
+int Maze::parse() {
   cin >> width >> height;
 
   string buf;
