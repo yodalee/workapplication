@@ -1,10 +1,15 @@
+
+#include "map.h"
+
 class Orienteering {
 public:
   void main();
+private:
+  Map *map;
 };
 
 void Orienteering::main() {
-  // TODO: Implement this function
+  map = new Map();
 }
 
 int main(int argc, char* argv[]) {
