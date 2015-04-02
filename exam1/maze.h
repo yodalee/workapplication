@@ -16,7 +16,7 @@ public:
   ~Maze();
   int parse();
 
-  int **buildGraph();
+  void buildGraph(vector<vector<int> > &);
 private:
   void bfs(Node *, vector<int> &);
   void addEdge(int, queue<int> &);

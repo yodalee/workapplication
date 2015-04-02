@@ -1,4 +1,3 @@
-#include <set>
 #include <climits>
 #include <algorithm>
 
@@ -19,18 +18,25 @@ Maze::~Maze() {
   }
 }
 
-int **
-Maze::buildGraph()
+void
+Maze::buildGraph(vector<vector<int> > &disTable)
 {
   int size = checkpoints.size() + 2;
   //initial distance table
-  int **disTable = new int *[size];
+  disTable.resize(size);
   for (int i = 0; i < size; ++i) {
-    disTable[i] = new int[size];
-    disTable[i][i] = 0;
+    disTable[i].resize(size);
   }
 
-  return disTable;
+  vector<int> vec;
+  bfs(data[start], vec);
+  copy(vec.begin(), vec.end(), disTable[0].begin());
+  bfs(data[end], vec);
+  copy(vec.begin(), vec.end(), disTable[size-1].begin());
+  for (int i = 0; i < checkpoints.size(); ++i) {
+    bfs(data[checkpoints[i]], vec);
+    copy(vec.begin(), vec.end(), disTable[i+1].begin());
+  }
 }
 
 void
@@ -56,7 +62,8 @@ Maze::addEdge(int current, queue<int> &open)
 
 void Maze::updateNode(int idx, int distance, queue<int> &open)
 {
-  if (data[idx]->getType() != Node::nodeType::Closed) {
+  if (data[idx]->getType() != Node::nodeType::Closed and
+      data[idx]->getDistance() == INT_MAX) {
     data[idx]->setDistance(distance);
     open.push(idx);
   }
@@ -71,17 +78,14 @@ Maze::bfs(Node *node, vector<int> &vec)
   for (auto i : data) {
     i->setDistance(INT_MAX);
   }
-  vec.reserve(checkpoints.size() + 2);
+  vec.resize(checkpoints.size() + 2);
   queue<int> open;
-  set<int> closed;
 
   open.push(node->getId());
-  closed.insert(node->getId());
   node->setDistance(0);
   while(!open.empty()) {
     int current = open.front();
     addEdge(current, open);
-    closed.insert(current);
     open.pop();
   }
 
