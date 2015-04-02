@@ -23,7 +23,6 @@ private:
   void updateNode(int, int, queue<int> &);
   vector<Node *> data;
   vector<int> checkpoints;
-  int start, end;
 
   int height, width;
 };

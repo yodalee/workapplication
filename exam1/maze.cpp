@@ -5,10 +5,7 @@ using namespace std;
 
 #include "maze.h"
 
-Maze::Maze() {
-  start = -1;
-  end = -1;
-}
+Maze::Maze() {}
 
 //release all Node stored in data vector
 Maze::~Maze() {
@@ -21,7 +18,7 @@ Maze::~Maze() {
 void
 Maze::buildGraph(vector<vector<int> > &disTable)
 {
-  int size = checkpoints.size() + 2;
+  int size = checkpoints.size();
   //initial distance table
   disTable.resize(size);
   for (int i = 0; i < size; ++i) {
@@ -29,13 +26,10 @@ Maze::buildGraph(vector<vector<int> > &disTable)
   }
 
   vector<int> vec;
-  bfs(data[start], vec);
-  copy(vec.begin(), vec.end(), disTable[0].begin());
-  bfs(data[end], vec);
-  copy(vec.begin(), vec.end(), disTable[size-1].begin());
+
   for (int i = 0; i < checkpoints.size(); ++i) {
     bfs(data[checkpoints[i]], vec);
-    copy(vec.begin(), vec.end(), disTable[i+1].begin());
+    copy(vec.begin(), vec.end(), disTable[i].begin());
   }
 }
 
@@ -78,7 +72,7 @@ Maze::bfs(Node *node, vector<int> &vec)
   for (auto i : data) {
     i->setDistance(INT_MAX);
   }
-  vec.resize(checkpoints.size() + 2);
+  vec.resize(checkpoints.size());
   queue<int> open;
 
   open.push(node->getId());
@@ -90,10 +84,8 @@ Maze::bfs(Node *node, vector<int> &vec)
   }
 
   //update distance table
-  vec[0] = data[start]->getDistance();
-  vec[vec.size()-1] = data[end]->getDistance();
   for (int i = 0; i < checkpoints.size(); ++i) {
-    vec[i+1] = data[checkpoints[i]]->getDistance();
+    vec[i] = data[checkpoints[i]]->getDistance();
   }
 }
 
@@ -104,6 +96,8 @@ Maze::parse() {
   string buf;
   string::const_iterator it;
   int id = 0;
+  int start = -1;
+  int end = -1;
   for (int i = 0; i < height; ++i) {
     cin >> buf;
     for (it = buf.cbegin(); it != buf.cend(); it++) {
@@ -121,6 +115,8 @@ Maze::parse() {
       id++;
     }
   }
+  checkpoints.insert(checkpoints.begin(), start);
+  checkpoints.push_back(end);
   if (start == -1 or end == -1) {
     return -1;
   }
