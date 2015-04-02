@@ -13,11 +13,12 @@ class Map
 public:
   Map ();
   ~Map();
+  void parse();
 private:
   vector<Node *> data;
-  vector<Node *> checkpoints;
-  Node *start;
-  Node *end;
+  vector<int> checkpoints;
+  int start, end;
+
   int height, width;
 };
 #endif /* MAP_H_ */

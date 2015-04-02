@@ -10,6 +10,7 @@ private:
 
 void Orienteering::main() {
   map = new Map();
+  map->parse();
 }
 
 int main(int argc, char* argv[]) {

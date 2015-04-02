@@ -24,6 +24,8 @@ public:
     }
     return Unknown;
   }
+
+  Node::nodeType getType() { return type; }
 private:
   int id;
   Node::nodeType type;
