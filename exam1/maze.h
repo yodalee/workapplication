@@ -13,7 +13,7 @@ class Maze
 public:
   Maze ();
   ~Maze();
-  void parse();
+  int parse();
 private:
   vector<Node *> data;
   vector<int> checkpoints;

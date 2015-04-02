@@ -10,7 +10,9 @@ private:
 
 void Orienteering::main() {
   maze = new Maze();
-  maze->parse();
+  if(maze->parse()) {
+    cout << -1;
+  }
 }
 
 int main(int argc, char* argv[]) {

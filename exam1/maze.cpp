@@ -36,4 +36,8 @@ int Maze::parse() {
       id++;
     }
   }
+  if (start == -1 or end == -1) {
+    return -1;
+  }
+  return 0;
 }
