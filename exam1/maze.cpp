@@ -36,6 +36,30 @@ Maze::buildGraph()
 void
 Maze::addEdge(int current, queue<int> &open)
 {
+  //up
+  if (current - width >= 0) {
+    updateNode(current - width, data[current]->getDistance() + 1, open);
+  }
+  //down
+  if (current + width < width * height) {
+    updateNode(current + width, data[current]->getDistance() + 1, open);
+  }
+  //left
+  if (current % width != 0) {
+    updateNode(current - 1, data[current]->getDistance() + 1, open);
+  }
+  //right
+  if (current % width != (width -1)) {
+    updateNode(current + 1, data[current]->getDistance() + 1, open);
+  }
+}
+
+void Maze::updateNode(int idx, int distance, queue<int> &open)
+{
+  if (data[idx]->getType() != Node::nodeType::Closed) {
+    data[idx]->setDistance(distance);
+    open.push(idx);
+  }
 }
 
 //Run bfs search on specific node

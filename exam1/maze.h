@@ -20,6 +20,7 @@ public:
 private:
   void bfs(Node *, vector<int> &);
   void addEdge(int, queue<int> &);
+  void updateNode(int, int, queue<int> &);
   vector<Node *> data;
   vector<int> checkpoints;
   int start, end;
