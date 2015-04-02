@@ -1,3 +1,9 @@
+#include <set>
+#include <climits>
+#include <algorithm>
+
+using namespace std;
+
 #include "maze.h"
 
 Maze::Maze() {
@@ -13,7 +19,51 @@ Maze::~Maze() {
   }
 }
 
-int Maze::parse() {
+int **
+Maze::buildGraph()
+{
+  int size = checkpoints.size() + 2;
+  //initial distance table
+  int **disTable = new int *[size];
+  for (int i = 0; i < size; ++i) {
+    disTable[i] = new int[size];
+    disTable[i][i] = 0;
+  }
+
+  return disTable;
+}
+
+void
+Maze::addEdge(int current, queue<int> &open)
+{
+}
+
+//Run bfs search on specific node
+//filled the vec with distance to start, checkpoints, end
+void
+Maze::bfs(Node *node, vector<int> &vec)
+{
+  //clear all node distance as int_MAX
+  for (auto i : data) {
+    i->setDistance(INT_MAX);
+  }
+  vec.reserve(checkpoints.size() + 2);
+  queue<int> open;
+  set<int> closed;
+
+  open.push(node->getId());
+  closed.insert(node->getId());
+  node->setDistance(0);
+  while(!open.empty()) {
+    int current = open.front();
+    addEdge(current, open);
+    closed.insert(current);
+    open.pop();
+  }
+}
+
+int
+Maze::parse() {
   cin >> width >> height;
 
   string buf;

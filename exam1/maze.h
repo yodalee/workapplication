@@ -1,6 +1,7 @@
 #ifndef MAZE_H_
 #define MAZE_H_ value
 
+#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -14,7 +15,11 @@ public:
   Maze ();
   ~Maze();
   int parse();
+
+  int **buildGraph();
 private:
+  void bfs(Node *, vector<int> &);
+  void addEdge(int, queue<int> &);
   vector<Node *> data;
   vector<int> checkpoints;
   int start, end;
