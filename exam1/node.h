@@ -25,9 +25,13 @@ public:
     return Unknown;
   }
 
+  void setDistance(int d) { distance = d; }
+  int getDistance() { return distance; }
   Node::nodeType getType() { return type; }
+  int getId() { return id; }
 private:
   int id;
+  int distance;
   Node::nodeType type;
 };
 
