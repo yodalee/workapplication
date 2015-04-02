@@ -6,8 +6,8 @@ import subprocess
 
 runCmd = "./../a.out"
 testDir = "testcase"
-testlist = ["example1", "example2", "example3", "invalid"]
-anslist = [4, 9, 6, -1]
+testlist = ["example1", "example2", "example3", "invalid", "nostart", "noend"]
+anslist = [4, 9, 6, -1, -1, -1]
 
 
 class TestOrienteering(unittest.TestCase):
@@ -25,7 +25,7 @@ def execute(test):
 
 def create_test(test, ans):
     def do_test(self):
-        self.assertEqual(execute(test), ans)
+        self.assertEqual(execute(test), str(ans))
     return do_test
 
 if __name__ == '__main__':
