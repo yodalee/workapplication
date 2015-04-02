@@ -84,6 +84,13 @@ Maze::bfs(Node *node, vector<int> &vec)
     closed.insert(current);
     open.pop();
   }
+
+  //update distance table
+  vec[0] = data[start]->getDistance();
+  vec[vec.size()-1] = data[end]->getDistance();
+  for (int i = 0; i < checkpoints.size(); ++i) {
+    vec[i+1] = data[checkpoints[i]]->getDistance();
+  }
 }
 
 int
