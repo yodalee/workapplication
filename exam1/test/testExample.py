@@ -6,8 +6,8 @@ import subprocess
 
 runCmd = "./../a.out"
 testDir = "testcase"
-testlist = ["example1", "example2", "example3", "invalid", "nostart", "noend"]
-anslist = [4, 9, 6, -1, -1, -1]
+testlist = ["example1", "example2", "example3", "test1", "invalid", "nostart", "noend"]
+anslist = [4, 9, 6, 26, -1, -1, -1]
 
 
 class TestOrienteering(unittest.TestCase):
